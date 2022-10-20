@@ -9,10 +9,11 @@
   },
   "dependencies": {
     "sass": "^1.53.0",
-    "vue": "^3.2.25"
+    "vue": "^3.2.25",
+    "vue-cli": "^2.9.6"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^2.3.4",
     "node-sass": "^7.0.1",
     "sass-loader": "^13.0.2",
     "vite": "^2.9.9"

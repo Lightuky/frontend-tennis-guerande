@@ -1,25 +1,48 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue';
+  import ArticleGrand from './components/ArticleGrand.vue';
+  import ArticleMignature from './components/ArticleMignature.vue';
+  import ComposantCitation from './components/ComposantCitation.vue';
+  import ComposantFooter from './components/ComposantFooter.vue';
+  import ComposantHeader from './components/ComposantHeader.vue';
+</script>
+
+<script>
+  export default {
+    name: 'App',
+    components: {
+      ArticleGrand,
+      ArticleMignature,
+      ComposantCitation,
+      ComposantFooter,
+      ComposantHeader,
+    }
+  }
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <ComposantHeader/>
+  <main>
+    <!--<ArticleGrand />-->
+  </main>
+  <ComposantFooter />
 </template>
 
 <style lang="scss">
-@import 'scss/fonctions';
-@import 'scss/mixins';
-@import 'scss/variables';
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: rem(60);
-}
+  #app {
+    box-sizing: border-box; 
+    
+    main {
+      margin-top: rem(105);
+      padding: 0 rem(8);
+    }
+
+    @media all and (min-width: $frontiere) {
+      main {
+        margin-top: rem(180);
+        padding: 0 calc((100% - $frontiere) / 2);
+        width: $frontiere;
+      }
+    }
+  }
 </style>
