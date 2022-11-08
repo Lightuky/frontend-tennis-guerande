@@ -1,16 +1,6 @@
 <script>
   export default {
-    name: 'ComposantHeader',
-    data() {
-      return {
-        estActif: false,
-      }
-    },
-    methods: {
-      afficherNavigation() {
-        this.estActif = !this.estActif;
-      }
-    }
+    name: 'HeaderComposant'
   }
 </script>
 
