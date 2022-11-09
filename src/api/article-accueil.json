@@ -1,20 +1,20 @@
-[{
+[
+  {
+    "id": 5,
     "titre": "Les ré-inscriptions sont ouvertes",
-    "paragraphes": [
-        {
-            "type": "texte",
-            "contenu": "Dans un monde où 80 % de la population mondiale possède des super-pouvoirs, nommés « Alters », on suit les aventures de Izuku Midoriya, l'un des rares humains ne possédant pas d'Alter. Malgré cela, Izuku rêve pourtant de rejoindre la filière super-héroïque de la grande académie Yuei et de devenir un jour un des plus grands héros de son époque."
-        }, {
-            "type": "texte",
-            "contenu": "Un jour, Izuku eût la chance de rencontrer son idole de toujours, All Might, numéro 1 des super-héros. Celui-ci va léguer à Izuku son Alter, le One For All."
-        }
-    ]
-}, {
+    "image": "https://www.bfmtv.com/comparateur/wp-content/uploads/2021/04/header_raquettes-de-tennis_mobile.jpg",
+    "contenu": "Dans un monde où 80 % de la population mondiale possède des super-pouvoirs, nommés « Alters », on suit les aventures de Izuku Midoriya, l'un des rares humains ne possédant pas d'Alter. Malgré cela, Izuku rêve pourtant de rejoindre la filière super-héroïque de la grande académie Yuei et de devenir un jour un des plus grands héros de son époque. Un jour, Izuku eût la chance de rencontrer son idole de toujours, All Might, numéro 1 des super-héros. Celui-ci va léguer à Izuku son Alter, le One For All."
+  },
+  {
+    "id": 25,
     "titre": "La fête médiévale recrute, engagez-vous",
-    "paragraphes": [
-        {
-            "type": "texte",
-            "contenu": "L'histoire commence pendant l'adolescence de Naruto, vers ses douze ans. Orphelin cancre et grand farceur, il fait toutes les bêtises possibles pour se faire remarquer. Son rêve : devenir le meilleur Hokage afin d'être reconnu par les habitants de son village. En effet, le démon renard à neuf queues scellé en lui a attisé la crainte et le mépris des autres villageois, qui, avec le temps, ne font plus de différence entre Kyûbi et Naruto. Malgré cela, Naruto s'entraîne dur afin de devenir genin, le premier niveau chez les ninjas"
-        }
-    ]
-}]
+    "image": "https://www.happycash.fr/wp-content/uploads/2018/05/vendre-sa-raquette-de-tennis.jpg",
+    "contenu": "L'histoire commence pendant l'adolescence de Naruto, vers ses douze ans. Orphelin cancre et grand farceur, il fait toutes les bêtises possibles pour se faire remarquer. Son rêve : devenir le meilleur Hokage afin d'être reconnu par les habitants de son village. En effet, le démon renard à neuf queues scellé en lui a attisé la crainte et le mépris des autres villageois, qui, avec le temps, ne font plus de différence entre Kyûbi et Naruto. Malgré cela, Naruto s'entraîne dur afin de devenir genin, le premier niveau chez les ninjas"
+  },
+  {
+    "id": 45,
+    "titre": "Lorem Ipsum",
+    "image": "https://lvdneng.rosselcdn.net/sites/default/files/dpistyles_v2/vdn_864w/2022/04/28/node_1172218/55314300/public/2022/04/28/B9730730859Z.1_20220428092902_000%2BG46KCOMPN.2-0.jpg?itok=5G5OPNHL1651130949",
+    "contenu": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean facilisis, erat eget placerat pretium, elit purus gravida quam, vitae consectetur metus magna vel est. Nunc feugiat urna id leo accumsan, eget mollis est porta. Integer"
+  }
+]
