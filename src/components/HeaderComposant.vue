@@ -1,17 +1,17 @@
 <script>
-  export default {
-    name: 'HeaderComposant',
-    data() {
-      return {
-        estActif: false,
-      }
-    },
-    methods: {
-      afficherNavigation() {
-        this.estActif = !this.estActif;
-      }
+export default {
+  name: 'HeaderComposant',
+  data() {
+    return {
+      estActif: false,
+    }
+  },
+  methods: {
+    afficherNavigation() {
+      this.estActif = !this.estActif;
     }
   }
+}
 </script>
 
 <template>
@@ -22,7 +22,7 @@
       </button>
       <img class="logo" src="../assets/logo-tennis-club-guerande.png" alt="">
     </div>
-    <img class="photo-club" src="../assets/manga.jpg">
+    <img class="photo-club" src="https://via.placeholder.com/1550x230?text=Photo-Club">
     <ul class="infos">
       <li>
         <span class="valeur">300</span>
@@ -37,7 +37,7 @@
         <span class="nom">Terrains</span>
       </li>
     </ul>
-    
+
     <nav :class="{actif: estActif}">
       <ul>
         <li><a href="/">Accueil</a></li>
@@ -59,7 +59,6 @@
   header {
     z-index: 3;
     //height: $header-hauteur;
-    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -70,7 +69,8 @@
     flex-direction: column;
 
     .entete {
-      position: relative;
+      top: 0;
+      position: fixed;
       padding: rem(15);
       width: 100%;
       background-color: $blanc;
@@ -78,6 +78,7 @@
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
+      z-index: 2;
 
       button {
         width: $bouton-largeur;
@@ -109,6 +110,7 @@
           height: $barre-hauteur;
           border-radius: 10px;
           background-color: $noir;
+
           &::before,
           &::after {
             transition: 0.5s;
@@ -137,6 +139,7 @@
     }
 
     .photo-club {
+      margin-top: rem(93);
       object-fit: cover;
       width: 100%;
       height: rem(250);
@@ -148,6 +151,7 @@
       background-color: $rouge-sombre;
       display: flex;
       flex-direction: row;
+
       li {
         width: calc(100% / 3);
         display: flex;
@@ -157,18 +161,19 @@
     }
 
 
-
     nav {
+      position: fixed;
       transition: 0.5s;
       width: 100%;
       padding: rem(4) 0;
       margin: 0;
-      position: fixed;
       top: $header-hauteur;
       left: -100%;
-      &.actif  {
+
+      &.actif {
         left: 0;
       }
+
       background-color: $rouge;
 
       ul {
@@ -178,6 +183,7 @@
         flex-flow: row;
         justify-content: space-around;
         gap: rem(8);
+
         li {
           a {
 
