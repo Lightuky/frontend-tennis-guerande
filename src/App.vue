@@ -1,36 +1,24 @@
 <script setup>
-  import ArticleGrand from './components/ArticleGrand.vue';
-  import ArticleMignature from './components/ArticleMignature.vue';
-  import ComposantCitation from './components/ComposantCitation.vue';
-  import ComposantFooter from './components/ComposantFooter.vue';
-  import ComposantHeader from './components/ComposantHeader.vue';
+  import HeaderComposant from './components/HeaderComposant.vue';
 </script>
 
 <script>
   export default {
     name: 'App',
     components: {
-      ArticleGrand,
-      ArticleMignature,
-      ComposantCitation,
-      ComposantFooter,
-      ComposantHeader,
+      HeaderComposant,
     }
   }
 </script>
 
 <template>
-  <ComposantHeader/>
-  <main>
-    <!--<ArticleGrand />-->
-  </main>
-  <ComposantFooter />
+  <HeaderComposant/>
+  <main></main>
 </template>
 
 <style lang="scss">
 
-  #app {
-    box-sizing: border-box; 
+  #app { 
     
     main {
       margin-top: rem(105);
