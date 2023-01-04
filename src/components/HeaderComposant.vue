@@ -89,6 +89,7 @@ export default {
         background-color: initial;
         border: none;
         padding: 0;
+        cursor: pointer;
 
         &.actif {
           span {
@@ -139,7 +140,7 @@ export default {
     }
 
     .photo-club {
-      margin-top: rem(93);
+      margin-top: rem(106);
       object-fit: cover;
       width: 100%;
       height: rem(250);
@@ -166,7 +167,7 @@ export default {
       transition: 0.5s;
       width: 100%;
       padding: rem(4) 0;
-      margin: 0;
+      margin: rem(14) 0 0 0;
       top: $header-hauteur;
       left: -100%;
 
