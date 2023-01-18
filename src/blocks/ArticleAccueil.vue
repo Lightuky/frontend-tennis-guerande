@@ -9,6 +9,7 @@ export default {
   methods: {
     toggleDescription() {
       this.descEstOuverte = !this.descEstOuverte;
+      this.$emit('update-desc', this.descEstOuverte ? 1 : -1)
     }
   },
   props: {
@@ -19,14 +20,15 @@ export default {
 
 <template>
   <div class="blocArticle">
-<!--    <div class="articleIllustration" :class="{ illustAllongee: descEstOuverte }" :style="{backgroundImage:'url(' + article.image + ')'}"></div>-->
     <img :src="article.image" class="articleIllustration" :class="{ illustAllongee: descEstOuverte }" alt="Image Article">
-    <div class="articleTitre" @click="toggleDescription()" :class="{ invisible: descEstOuverte }" :title="article.titre">{{ article.titre }}</div>
-    <div class="articleDescription" @click="toggleDescription()" :class="{ invisible: !descEstOuverte }">
-      <div class="articleDescTitre">{{ article.titre }}</div>
-      <div class="articleDescContenu">{{ article.contenu }}</div>
-      <div class="articleDescLien">
-        <router-link :to="{ name: 'ArticleDetails', params: {articleId: article.id}}">En savoir plus</router-link>
+    <!-- TODO: div 0 hauteur > transition anim -->
+    <div class="articleDescription" @click="toggleDescription()" :class="{ descOpen: descEstOuverte }">
+      <div class="articleTitre" :class="descEstOuverte ? 'descOpen' : 'descClose'" :title="article.titre">{{ article.titre }}</div>
+      <div class="articleInfos" :class="{ descOpen: descEstOuverte }">
+        <div class="articleDescContenu">{{ article.contenu }}</div>
+        <div class="articleDescLien">
+          <router-link :to="{ name: 'ArticleDetails', params: {articleId: article.id}}">En savoir plus</router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -57,21 +59,23 @@ export default {
   }
 
   .articleTitre {
-    margin: 0 rem(30);
-    padding: rem(10) 0;
     font-weight: 600;
-    font-size: rem(18);
-    color: $gris-tres-sombre;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    border-radius: 0 0 7px 7px;
-    -webkit-box-shadow: 0 1px 5px 0 $gris-tres-sombre;
-    box-shadow: 0 1px 5px 0 $gris-tres-sombre;
 
-    &.invisible {
-      position: absolute;
+    &.descClose {
+      padding: rem(10) 0;
+      font-size: rem(18);
+      color: $gris-tres-sombre;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: center;
+      border-radius: 0 0 7px 7px;
+      -webkit-box-shadow: 0 1px 5px 0 $gris-tres-sombre;
+      box-shadow: 0 1px 5px 0 $gris-tres-sombre;
+    }
+
+    &.descOpen {
+      margin: 0 rem(15);
     }
 
     &:hover {
@@ -81,27 +85,38 @@ export default {
 
   .articleDescription {
     position: relative;
-    bottom: 30%;
-    height: 30%;
     margin: 0 rem(30);
     border-radius: 0 0 7px 7px;
     background-color: rgba(255,255,255,0.75);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    bottom: 0;
+
+    &.descOpen {
+      bottom: 30%;
+      height: 30%;
+      transition: bottom 0.25s;
+    }
 
     &:hover {
       cursor: pointer;
     }
   }
 
-  .invisible {
-    visibility: hidden;
-  }
+  .articleInfos {
+    transform: scaleY(0);
+    transform-origin: top;
+    position: absolute;
+    overflow: hidden;
+    transition: all 0s ease-in-out;
 
-  .articleDescTitre {
-    font-weight: 600;
-    margin: 0 rem(15);
+    &.descOpen {
+      position: initial;
+      height: auto;
+      transform: scaleY(1);
+      transition: all 0.35s ease-in-out;
+    }
   }
 
   .articleDescContenu {

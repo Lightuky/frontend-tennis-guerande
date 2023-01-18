@@ -8,18 +8,23 @@ export default {
   data() {
     return {
       articles: articlesData,
+      articleDescOpen: 0
     };
   },
-  methods: {}
+  methods: {
+    updateTitreLien(desc) {
+      this.articleDescOpen += desc;
+    }
+  }
 }
 </script>
 
 <template>
   <div class="titrePrincipal">DERNIÈRES ACTUALITÉS</div>
   <div class="conteneurArticles">
-    <ArticleAccueil v-for="article in articles" :key="article.id" :article="article"></ArticleAccueil>
+    <ArticleAccueil v-for="article in articles" :key="article.id" :article="article" @update-desc="updateTitreLien"></ArticleAccueil>
   </div>
-  <div class="titreLien">
+  <div class="titreLien" :class="{ descOpen: articleDescOpen }">
     <router-link :to="{ name: 'ArticlesListe'}">Voir toutes les actualités</router-link>
   </div>
 </template>
@@ -39,6 +44,10 @@ export default {
   .titreLien {
     font-size: rem(14);
     text-decoration: underline;
+
+    &.descOpen {
+      margin-top: -71.5px;
+    }
   }
 
   .conteneurArticles {
