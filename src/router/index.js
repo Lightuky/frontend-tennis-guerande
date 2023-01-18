@@ -1,14 +1,14 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Accueil from '../views/Accueil'
-import ArticlesListe from "../views/ArticlesListe";
-import ArticleDetails from "../views/ArticleDetails";
-import Dirigeants from "../views/Dirigeants";
-import Partenaires from "../views/Partenaires";
-import Photos from "../views/Photos";
-import Secretariat from "../views/Secretariat";
-import Contact from "../views/Contact";
-import MentionsLegales from "../views/MentionsLegales";
-import PolitiqueConfidentialite from "../views/PolitiqueConfidentialite";
+import Accueil from '../views/Accueil.vue'
+import ArticlesListe from "../views/ArticlesListe.vue";
+import ArticleDetails from "../views/ArticleDetails.vue";
+import Dirigeants from "../views/Dirigeants.vue";
+import Partenaires from "../views/Partenaires.vue";
+import Photos from "../views/Photos.vue";
+import Secretariat from "../views/Secretariat.vue";
+import Contact from "../views/Contact.vue";
+import MentionsLegales from "../views/MentionsLegales.vue";
+import PolitiqueConfidentialite from "../views/PolitiqueConfidentialite.vue";
 
 const routes = [
     // Pages principales
