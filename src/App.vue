@@ -1,9 +1,6 @@
-<script setup>
-import HeaderComposant from './components/HeaderComposant.vue';
-import FooterComposant from './components/FooterComposant.vue';
-</script>
-
 <script>
+import HeaderComposant from "./components/HeaderComposant";
+import FooterComposant from "./components/FooterComposant";
 
 export default {
   name: 'App',
