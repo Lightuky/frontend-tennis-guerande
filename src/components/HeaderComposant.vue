@@ -1,19 +1,3 @@
-<script>
-export default {
-  name: 'HeaderComposant',
-  data() {
-    return {
-      estActif: false,
-    }
-  },
-  methods: {
-    afficherNavigation() {
-      this.estActif = !this.estActif;
-    }
-  }
-}
-</script>
-
 <template>
   <header>
     <div class="entete">
@@ -22,7 +6,7 @@ export default {
       </button>
       <img class="logo" src="../assets/logo-tennis-club-guerande.png" alt="">
     </div>
-    <img class="photo-club" src="https://via.placeholder.com/1550x230?text=Photo-Club">
+    <img class="photo-club" src="https://via.placeholder.com/1550x230?text=Photo-Club" alt="hero">
     <ul class="infos">
       <li>
         <span class="valeur">300</span>
@@ -48,6 +32,22 @@ export default {
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  name: 'HeaderComposant',
+  data() {
+    return {
+      estActif: false,
+    }
+  },
+  methods: {
+    afficherNavigation() {
+      this.estActif = !this.estActif;
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 

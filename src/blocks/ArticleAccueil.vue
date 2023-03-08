@@ -1,3 +1,19 @@
+<template>
+  <div class="blocArticle">
+    <img :src="'data:image/jpeg;base64,' + article.image[0].base64" class="articleIllustration"
+         :class="{ illustAllongee: descEstOuverte }" alt="Image Article">
+    <div class="articleDescription" @click="toggleDescription()" :class="{ descOpen: descEstOuverte }">
+      <div class="articleTitre" :class="descEstOuverte ? 'descOpen' : 'descClose'" :title="article.titre">{{ article.titre }}</div>
+      <div class="articleInfos" :class="{ descOpen: descEstOuverte }">
+        <div class="articleDescContenu">{{ article.contenu }}</div>
+        <div class="articleDescLien">
+          <router-link :to="{ name: 'ArticleDetails', params: {articleId: article._id}}">En savoir plus</router-link>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
   name: 'ArticleAccueil',
@@ -17,22 +33,6 @@ export default {
   }
 }
 </script>
-
-<template>
-  <div class="blocArticle">
-    <img :src="article.image" class="articleIllustration" :class="{ illustAllongee: descEstOuverte }" alt="Image Article">
-    <!-- TODO: div 0 hauteur > transition anim -->
-    <div class="articleDescription" @click="toggleDescription()" :class="{ descOpen: descEstOuverte }">
-      <div class="articleTitre" :class="descEstOuverte ? 'descOpen' : 'descClose'" :title="article.titre">{{ article.titre }}</div>
-      <div class="articleInfos" :class="{ descOpen: descEstOuverte }">
-        <div class="articleDescContenu">{{ article.contenu }}</div>
-        <div class="articleDescLien">
-          <router-link :to="{ name: 'ArticleDetails', params: {articleId: article.id}}">En savoir plus</router-link>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
 
 <style lang="scss" scoped>
   .blocArticle {

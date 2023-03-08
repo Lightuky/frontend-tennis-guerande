@@ -1,24 +1,3 @@
-<script>
-import articlesData from "../api/article-accueil.json";
-import ArticleAccueil from "../blocks/ArticleAccueil.vue";
-
-export default {
-  name: "ArticlesListe",
-  components: {ArticleAccueil},
-  data() {
-    return {
-      articles: articlesData,
-      articleDescOpen: 0
-    };
-  },
-  methods: {
-    updateTitreLien(desc) {
-      this.articleDescOpen += desc;
-    }
-  }
-}
-</script>
-
 <template>
   <div class="titrePrincipal">DERNIÈRES ACTUALITÉS</div>
   <div class="conteneurArticles">
@@ -28,6 +7,37 @@ export default {
     <router-link :to="{ name: 'ArticlesListe'}">Voir toutes les actualités</router-link>
   </div>
 </template>
+
+<script>
+import ArticleAccueil from "../blocks/ArticleAccueil.vue";
+import axios from 'axios'
+
+export default {
+  name: "ArticlesListe",
+  components: {ArticleAccueil},
+  data() {
+    return {
+      articles: null,
+      articleDescOpen: 0
+    };
+  },
+  methods: {
+    getArticlesLimit: async function () {
+      this.articles = await axios.get('http://localhost:8081/api/articles/limit' )
+          .then(function (response) {
+            console.log(response.data)
+            return response.data
+          })
+    },
+    updateTitreLien(desc) {
+      this.articleDescOpen += desc;
+    }
+  },
+  created() {
+    this.getArticlesLimit()
+  }
+}
+</script>
 
 <style lang="scss" scoped>
   .titrePrincipal, .titreLien {
