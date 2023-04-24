@@ -4,3 +4,40 @@
 @import 'font-face';
 @import 'mixins';
 @import 'variables';
+
+// Global CSS
+.titrePrincipal {
+  font-size: rem(17);
+  text-align: center;
+  color: $rouge-sombre;
+  font-weight: 600;
+  margin: rem(35) 0 rem(45) 0;
+}
+
+.titreSecondaire {
+  font-size: rem(14);
+  text-align: center;
+  color: $rouge-sombre;
+  font-weight: 600;
+  margin: rem(35) 0 rem(45) 0;
+}
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus,
+button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
+  outline: 0 !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+// Responsive
+@media all and (min-width: $frontiere) {
+  .titrePrincipal {
+    font-size: rem(28);
+    margin: rem(35) 0 rem(45) 0;
+  }
+
+  .titreSecondaire {
+    font-size: rem(20);
+    margin: rem(35) 0 rem(45) 0;
+  }
+}

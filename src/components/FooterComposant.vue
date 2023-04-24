@@ -15,13 +15,13 @@ export default {
       <div>
         <div class="texteHighlight">Nous contacter</div>
         <div class="iconesSocial">
-          <a href="https://google.fr">
+          <a class="nav-link" href="https://google.fr">
             <font-awesome-icon icon="fa-brands fa-square-twitter"/>
           </a>
-          <a href="https://google.fr">
+          <a class="nav-link" href="https://google.fr">
             <font-awesome-icon icon="fa-brands fa-square-facebook"/>
           </a>
-          <a href="https://google.fr">
+          <a class="nav-link" href="https://google.fr">
             <font-awesome-icon icon="fa-brands fa-square-instagram"/>
           </a>
         </div>

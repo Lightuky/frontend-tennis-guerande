@@ -1,34 +1,31 @@
 <template>
   <header>
-    <div class="entete">
-      <button @click="afficherNavigation()" :class="{actif: estActif}">
-        <span></span>
-      </button>
-      <img class="logo" src="../assets/logo-tennis-club-guerande.png" alt="">
-    </div>
-    <img class="photo-club" src="https://via.placeholder.com/1550x230?text=Photo-Club" alt="hero">
-    <ul class="infos">
-      <li>
-        <span class="valeur">300</span>
-        <span class="nom">Adhérents</span>
-      </li>
-      <li>
-        <span class="valeur">5</span>
-        <span class="nom">Moniteurs</span>
-      </li>
-      <li>
-        <span class="valeur">4</span>
-        <span class="nom">Terrains</span>
-      </li>
-    </ul>
-
-    <nav :class="{actif: estActif}">
-      <ul>
-        <li><a href="/">Accueil</a></li>
-        <li><a href="/le-club">Le Club</a></li>
-        <li><a href="/entrainements">Entrainements</a></li>
-        <li><a href="/inscription">Inscriptions</a></li>
-      </ul>
+    <nav class="navbar navbar-expand-lg w-100 navbar-light bg-light">
+      <div class="container-fluid">
+        <router-link :to="{name: 'Accueil'}" class="navbar-brand">
+          <img class="logo" src="../assets/logo-tennis-club-guerande.png" alt="Logo" title="Logo du Tennis Club de Guérande">
+        </router-link>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav ms-lg-5">
+            <router-link :to="{name: 'LeClub'}" class="nav-item nav-link mx-lg-3">Le Club</router-link>
+            <router-link :to="{name: 'ArticlesListe'}" class="nav-item nav-link mx-lg-3">Actualités</router-link>
+            <router-link :to="{name: 'Competition'}" class="nav-item nav-link mx-lg-3">Compétition</router-link>
+            <router-link :to="{name: 'DevenirLicencie'}" class="nav-item nav-link mx-lg-3">Devenir licencié</router-link>
+            <router-link :to="{name: 'Reservation'}" class="nav-item nav-link mx-lg-3">Réservation</router-link>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <form class="d-flex">
+              <div class="input-group input-group-sm">
+                <input type="text" class="form-control" placeholder="Rechercher">
+                <button type="button" class="btn btn-secondary"><i class="bi bi-search"></i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </nav>
   </header>
 </template>
@@ -36,161 +33,22 @@
 <script>
 export default {
   name: 'HeaderComposant',
-  data() {
-    return {
-      estActif: false,
-    }
-  },
-  methods: {
-    afficherNavigation() {
-      this.estActif = !this.estActif;
-    }
-  }
+  data() {},
+  methods: {},
 }
 </script>
 
 <style lang="scss" scoped>
+  .logo {width: 45px}
 
-  $header-hauteur: rem(66);
-  $bouton-hauteur: rem(14);
-  $bouton-largeur: rem(18);
-  $barre-hauteur: rem(1.5);
+  #navbarCollapse {
+    .nav-link {
+      color: #BF0A1D;
+      font-family: Montserrat, serif;
+      font-weight: bold;
+      font-size: rem(15);
 
-  header {
-    z-index: 3;
-    //height: $header-hauteur;
-    top: 0;
-    left: 0;
-    right: 0;
-    color: $blanc;
-    font-size: rem(14);
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-
-    .entete {
-      top: 0;
-      position: fixed;
-      padding: rem(15);
-      width: 100%;
-      background-color: $blanc;
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 2;
-
-      button {
-        width: $bouton-largeur;
-        height: $bouton-hauteur;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: initial;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-
-        &.actif {
-          span {
-            background-color: inherit;
-
-            &::before {
-              transform: translateX(-50%) translateY(0) rotate(-45deg)
-            }
-
-            &::after {
-              transform: translateX(-50%) translateY(0) rotate(45deg);
-            }
-          }
-        }
-
-        span {
-          transition: 0.5s;
-          width: 100%;
-          height: $barre-hauteur;
-          border-radius: 10px;
-          background-color: $noir;
-
-          &::before,
-          &::after {
-            transition: 0.5s;
-            content: '';
-            position: absolute;
-            width: $bouton-largeur;
-            height: $barre-hauteur;
-            border-radius: 10px;
-            background-color: $noir;
-          }
-
-          &::before {
-            transform: translateX(-50%) translateY(calc(-1 * ($bouton-hauteur / 2 - $barre-hauteur)));
-          }
-
-          &::after {
-            transform: translateX(-50%) translateY(calc($bouton-hauteur / 2 - $barre-hauteur));
-          }
-        }
-      }
-
-      .logo {
-        width: rem(50);
-        height: rem(50);
-      }
-    }
-
-    .photo-club {
-      margin-top: rem(106);
-      object-fit: cover;
-      width: 100%;
-      height: rem(250);
-    }
-
-    .infos {
-      padding: rem(10) 0 rem(10);
-      width: 100%;
-      background-color: $rouge-sombre;
-      display: flex;
-      flex-direction: row;
-
-      li {
-        width: calc(100% / 3);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-
-    nav {
-      position: fixed;
-      transition: 0.5s;
-      width: 100%;
-      padding: rem(4) 0;
-      margin: rem(14) 0 0 0;
-      top: $header-hauteur;
-      left: -100%;
-
-      &.actif {
-        left: 0;
-      }
-
-      background-color: $rouge;
-
-      ul {
-        width: 100%;
-        margin: 0;
-        display: flex;
-        flex-flow: row;
-        justify-content: space-around;
-        gap: rem(8);
-
-        li {
-          a {
-
-          }
-        }
-      }
+      &:hover {color: #746466}
     }
   }
 
