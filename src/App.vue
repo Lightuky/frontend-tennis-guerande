@@ -13,7 +13,11 @@ export default {
   components: {
     HeaderComposant,
     FooterComposant,
-  }
+  },
+  data() {
+    return {}
+  },
+  methods: {}
 }
 </script>
 
