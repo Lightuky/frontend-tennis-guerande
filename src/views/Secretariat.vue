@@ -1,8 +1,8 @@
 <template>
   <div class="titrePrincipal">LE SECRÉTARIAT</div>
-  <div class="cardsContainer d-flex flex-wrap justify-content-center mt-5 mb-1">
-    <div class="cardBlock text-center mx-5" v-for="secretary in secretaries" :key="secretary.id">
-      <img class="profilePicture" :src="'data:image/jpeg;base64,/' + secretary.picture[0].base_64" :alt="secretary.profile[0].nom + ' ' + secretary.profile[0].prenom">
+  <div class="d-flex flex-wrap justify-content-center mt-5 mb-1">
+    <div class="text-center mx-5" v-for="secretary in secretaries" :key="secretary.id">
+      <img class="profilePicture" :src="'data:image/jpeg;base64,' + secretary.picture[0].base_64" :alt="secretary.profile[0].nom + ' ' + secretary.profile[0].prenom">
       <div class="infosBlock">
         <div class="nameText mt-2 mb-1">{{ secretary.profile[0].nom + ' ' + secretary.profile[0].prenom }}</div>
         <div class="jobText mt-1 mb-2">En poste depuis <span>{{ formatDate(secretary.dateEmbauche) }}</span></div>

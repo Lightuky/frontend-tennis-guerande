@@ -1,6 +1,6 @@
 <template>
   <div class="blocArticle">
-    <img :src="'data:image/jpeg;base64,' + article.image[0].base64" class="articleIllustration"
+    <img :src="'data:image/jpeg;base64,' + article.image[0].base_64" class="articleIllustration"
          :class="{ illustAllongee: descEstOuverte }" alt="Image Article">
     <div class="articleDescription" @click="toggleDescription()" :class="{ descOpen: descEstOuverte }">
       <div class="articleTitre" :class="descEstOuverte ? 'descOpen' : 'descClose'" :title="article.titre">{{ article.titre }}</div>
