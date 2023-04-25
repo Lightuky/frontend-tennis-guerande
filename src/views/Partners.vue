@@ -15,12 +15,12 @@ export default {
   name: "Partenaires",
   data() {
     return {
-      partenaires: null,
+      partners: null,
     };
   },
   methods: {
-    getSecretaries: async function () {
-      this.secretaries = await axios.get('http://localhost:8081/api/personnes/poste/secretaire' )
+    getPartners: async function () {
+      this.partners = await axios.get('http://localhost:8081/api/partenaires' )
           .then(function (response) {
             console.log(response.data)
             return response.data
@@ -32,7 +32,7 @@ export default {
     }
   },
   created() {
-    this.getSecretaries()
+    this.getPartners()
   }
 }
 </script>
