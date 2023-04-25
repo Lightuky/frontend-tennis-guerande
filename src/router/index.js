@@ -3,7 +3,7 @@ import Accueil from '../views/Accueil.vue'
 import ArticlesListe from "../views/ArticlesListe.vue";
 import ArticleDetails from "../views/ArticleDetails.vue";
 import Dirigeants from "../views/Dirigeants.vue";
-import Partenaires from "../views/Partenaires.vue";
+import Partenaires from "../views/Partenaries.vue";
 import Photos from "../views/Photos.vue";
 import Secretariat from "../views/Secretariat.vue";
 import Contact from "../views/Contact.vue";

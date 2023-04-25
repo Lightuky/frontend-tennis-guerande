@@ -87,13 +87,12 @@ export default {
   },
   methods: {
     getSecretaries: async function () {
-      this.secretaries = await axios.get('http://localhost:8081/api/personnes/adherents/secretaire' )
+      this.secretaries = await axios.get('http://localhost:8081/api/personnes/poste/secretaire' )
           .then(function (response) {
             console.log(response.data)
             return response.data
           })
     },
-
     formatDate(dateString) {
       const date = dayjs(dateString);
       return date.format('YYYY');

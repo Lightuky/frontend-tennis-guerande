@@ -19,7 +19,7 @@
     <ArticleAccueil v-for="article in articles" :key="article.id" :article="article" @update-desc="updateTitreLien"></ArticleAccueil>
   </div>
   <div class="titreLien" :class="{ descOpen: articleDescOpen }">
-    <router-link :to="{ name: 'ArticlesListe'}">Voir toutes les actualités</router-link>
+    <router-link class="nav-link" :to="{ name: 'ArticlesListe'}">Voir toutes les actualités</router-link>
   </div>
 </template>
 

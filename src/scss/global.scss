@@ -5,7 +5,17 @@
 @import 'mixins';
 @import 'variables';
 
-// Global CSS
+// Fix Base Styles -------------------------------------
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus,
+button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
+  outline: 0 !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+}
+
+// Global CSS ------------------------------------------
+
 .titrePrincipal {
   font-size: rem(17);
   text-align: center;
@@ -22,14 +32,20 @@
   margin: rem(35) 0 rem(45) 0;
 }
 
-textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus,
-button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
-  outline: 0 !important;
-  -webkit-appearance: none;
-  box-shadow: none !important;
+body {
+  &::-webkit-scrollbar {
+    width: 8px !important;
+    background-color: white !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgb(208, 46, 46) !important;
+    border-radius: 10px !important;
+  }
 }
 
-// Responsive
+// Responsive ------------------------------------------
+
 @media all and (min-width: $frontiere) {
   .titrePrincipal {
     font-size: rem(28);
