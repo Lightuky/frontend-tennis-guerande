@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     getSecretaries: async function () {
-      this.secretaries = await axios.get('http://localhost:8081/api/employes/poste/secretaire' )
+      this.secretaries = await axios.get('http://localhost:8081/api/employes/poste/secrétaire' )
           .then(function (response) {
             console.log(response.data)
             return response.data
