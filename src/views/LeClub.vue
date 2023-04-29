@@ -97,7 +97,7 @@ export default {
           subtitle: 'Découvrez la liste des partenaires du club et leurs activités respectives.'
         },
         {
-          name: 'Nos photos', route: 'Photos', icon: 'photos', btnText: 'VOIR LES PHOTOS',
+          name: 'Nos photos', route: 'AlbumsListe', icon: 'photos', btnText: 'VOIR LES PHOTOS',
           subtitle: 'Sont listées et triés ici les photos et albums liés au club.'
         }
       ]

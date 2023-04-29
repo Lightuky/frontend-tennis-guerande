@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "Photos"
-}
-</script>
-
 <template>
 
 </template>
@@ -11,3 +5,9 @@ export default {
 <style lang="scss" scoped>
 
 </style>
+
+<script>
+export default {
+  name: "AlbumDetails"
+}
+</script>

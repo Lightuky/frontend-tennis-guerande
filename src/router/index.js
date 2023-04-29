@@ -4,7 +4,8 @@ import ArticlesListe from "../views/ArticlesListe.vue";
 import ArticleDetails from "../views/ArticleDetails.vue";
 import Dirigeants from "../views/Dirigeants.vue";
 import Partenaires from "../views/Partners.vue";
-import Photos from "../views/Photos.vue";
+import AlbumsListe from "../views/AlbumsListe.vue";
+import AlbumDetails from "../views/AlbumDetails.vue";
 import Secretariat from "../views/Secretariat.vue";
 import Contact from "../views/Contact.vue";
 import MentionsLegales from "../views/MentionsLegales.vue";
@@ -20,7 +21,8 @@ const routes = [
     {path: '/le-club/nos-actualités/article/:articleId', name: 'ArticleDetails', component: ArticleDetails},
     {path: '/le-club/dirigeants', name: 'Dirigeants', component: Dirigeants},
     {path: '/le-club/nos-partenaires', name: 'Partenaires', component: Partenaires},
-    {path: '/le-club/nos-photos', name: 'Photos', component: Photos},
+    {path: '/le-club/nos-albums', name: 'AlbumsListe', component: AlbumsListe},
+    {path: '/le-club/album/:albumName', name: 'AlbumDetails', component: AlbumDetails},
     {path: '/le-club/le-secretariat', name: 'Secretariat', component: Secretariat},
     // Pages secondaires
     {path: '/nous-contacter', name: 'Contact', component: Contact},
