@@ -37,8 +37,8 @@ export default {
     };
   },
   methods: {
-    getArticlesLimit: async function () {
-      this.articles = await axios.get('http://localhost:8081/api/articles/limit' )
+    getArticles: async function () {
+      this.articles = await axios.get('http://localhost:8081/api/articles?limit=3' )
           .then(function (response) {
             console.log(response.data)
             return response.data
@@ -49,7 +49,7 @@ export default {
     }
   },
   created() {
-    this.getArticlesLimit()
+    this.getArticles()
   }
 }
 </script>
