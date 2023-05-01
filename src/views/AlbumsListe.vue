@@ -3,7 +3,7 @@
   <div class="titreSecondaire mt-0 mb-4">Trier les albums</div>
   <div class="mb-5">
     <select class="mx-auto form-select pe-5 text-capitalize" v-model="selectedCategory" @change="updateAlbums">
-      <option disabled value="">Sélectionner une categorie</option>
+      <option disabled value="">Sélectionner une catégorie</option>
       <option value="">Tous</option>
       <option class="text-capitalize" v-for="category in categories" :value="category">{{ category }}</option>
     </select>
