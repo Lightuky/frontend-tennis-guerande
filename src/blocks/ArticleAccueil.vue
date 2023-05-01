@@ -1,13 +1,13 @@
 <template>
   <div class="blocArticle">
-    <img :src="'data:image/jpeg;base64,' + article.image[0].base_64" class="articleIllustration"
-         :class="{ illustAllongee: descEstOuverte }" alt="Image Article">
+    <img :src="article.image.length !== 0 ? 'data:image/jpeg;base64,' + article.image[0].base_64 : 'src/assets/article-placeholder.jpg'"
+         class="articleIllustration" :class="{ illustAllongee: descEstOuverte }" alt="Image Article">
     <div class="articleDescription" @click="toggleDescription()" :class="{ descOpen: descEstOuverte }">
       <div class="articleTitre" :class="descEstOuverte ? 'descOpen' : 'descClose'" :title="article.titre">{{ article.titre }}</div>
       <div class="articleInfos" :class="{ descOpen: descEstOuverte }">
         <div class="articleDescContenu">{{ article.contenu }}</div>
         <div class="articleDescLien">
-          <router-link :to="{ name: 'ArticleDetails', params: {articleId: article._id}}">En savoir plus</router-link>
+          <router-link class="nav-link" :to="{ name: 'ArticleDetails', params: {articleTitle: article.titre}}">En savoir plus</router-link>
         </div>
       </div>
     </div>
