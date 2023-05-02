@@ -18,7 +18,7 @@ const routes = [
     // Pages Club
     {path: '/le-club', name: 'LeClub', component: LeClub},
     {path: '/le-club/nos-actualités', name: 'ArticlesListe', component: ArticlesListe},
-    {path: '/le-club/nos-actualités/article/:articleTitle', name: 'ArticleDetails', component: ArticleDetails},
+    {path: '/le-club/article/:articleTitle', name: 'ArticleDetails', component: ArticleDetails},
     {path: '/le-club/dirigeants', name: 'Dirigeants', component: Dirigeants},
     {path: '/le-club/nos-partenaires', name: 'Partenaires', component: Partenaires},
     {path: '/le-club/nos-albums', name: 'AlbumsListe', component: AlbumsListe},
