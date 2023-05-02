@@ -85,7 +85,7 @@
 
   .backBtn {
     background-color: #da5b3d;
-    &:hover {background-color: #e52722}
+    &:hover, &:focus-visible, &:active {background-color: #e52722 !important}
   }
 
   .modal {
