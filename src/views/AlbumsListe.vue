@@ -11,15 +11,23 @@
   <div class="mx-5">
     <div class="containerTitle ms-3 mb-5">Liste des albums photos</div>
     <div class="albumsContainer d-flex flex-wrap p-3 mb-5">
-      <router-link class="albumBlock text-center my-4 py-2" v-for="album in albums" :key="album.id" :to="{ name: 'AlbumDetails', params: {albumName: album.nom}}">
-        <div class="iconContainer position-relative mx-auto">
-          <img class="albumIcon" src="../assets/album-icon.png" :alt="album.nom" :title="album.nom">
-          <span class="badge d-flex align-items-center text-white position-absolute top-0 end-0" :title="`Contient ${album.images} images`">
+      <template v-if="isLoading">
+        <div class="text-center">
+          <i class="spinner bi bi-arrow-clockwise"></i>
+          <div>Données en cours de récupération</div>
+        </div>
+      </template>
+      <template v-else>
+        <router-link class="albumBlock text-center my-4 py-2" v-for="album in albums" :key="album.id" :to="{ name: 'AlbumDetails', params: {albumName: album.nom}}">
+          <div class="iconContainer position-relative mx-auto">
+            <img class="albumIcon" src="../assets/album-icon.png" :alt="album.nom" :title="album.nom">
+            <span class="badge d-flex align-items-center text-white position-absolute top-0 end-0" :title="`Contient ${album.images} images`">
             <span style="font-size: larger">{{ album.images }}</span><i class="bi bi-image ms-1"></i>
           </span>
-        </div>
-        <div class="albumTitle w-75 mx-auto">{{ album.nom }}</div>
-      </router-link>
+          </div>
+          <div class="albumTitle w-75 mx-auto">{{ album.nom }}</div>
+        </router-link>
+      </template>
     </div>
   </div>
 </template>
@@ -73,6 +81,7 @@ export default {
   name: "AlbumsListe",
   data() {
     return {
+      isLoading: true,
       categories: [],
       selectedCategory: '',
       albums: [],
@@ -95,13 +104,15 @@ export default {
       if (this.selectedCategory) {
         apiUrl += `?category=${this.selectedCategory}`;
       }
-      this.albums = await axios.get(apiUrl)
-          .then(function (response) {
+      await axios.get(apiUrl)
+          .then(response => {
             console.log(response.data)
-            return response.data
+            this.albums = response.data
+            this.isLoading = false;
           })
     },
     updateAlbums() {
+      this.isLoading = true;
       this.getAlbums();
     },
   }

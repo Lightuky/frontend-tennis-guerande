@@ -1,27 +1,43 @@
 <template>
-  <div class="titrePrincipal">LE SECRÉTARIAT</div>
+  <div class="titrePrincipal">NOS DIRIGEANTS</div>
   <div class="titreSecondaire">LE BUREAU</div>
   <div class="d-flex flex-wrap justify-content-center mt-5 mb-1">
-    <div class="text-center mx-5" v-for="club_director in directors[0]" :key="club_director.id">
-      <img class="profilePicture" :src="'data:image/jpeg;base64,' + club_director.picture[0].base_64"
-           :alt="club_director.profile[0].nom + ' ' + club_director.profile[0].prenom">
-      <div class="infosBlock" :style="{'border-color': getColor(club_director.poste)}">
-        <div class="nameText mt-1 mb-2">{{ club_director.profile[0].nom + ' ' + club_director.profile[0].prenom }}</div>
-        <div class="jobBadge mt-0 mb-2 py-1 px-3 text-capitalize text-white mx-auto" :style="{'background-color': getColor(club_director.poste)}">
-          {{ club_director.poste }}
+    <template v-if="isLoading">
+      <div class="text-center">
+        <i class="spinner bi bi-arrow-clockwise"></i>
+        <div>Données en cours de récupération</div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="text-center mx-5" v-for="club_director in directors[0]" :key="club_director.id">
+        <img class="profilePicture" :src="'data:image/jpeg;base64,' + club_director.picture[0].base_64"
+             :alt="club_director.profile[0].nom + ' ' + club_director.profile[0].prenom">
+        <div class="infosBlock" :style="{'border-color': getColor(club_director.poste)}">
+          <div class="nameText mt-1 mb-2">{{ club_director.profile[0].nom + ' ' + club_director.profile[0].prenom }}</div>
+          <div class="jobBadge mt-0 mb-2 py-1 px-3 text-capitalize text-white mx-auto" :style="{'background-color': getColor(club_director.poste)}">
+            {{ club_director.poste }}
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
   <div class="titreSecondaire pt-3">LE CONSEIL D'ADMINISTRATION</div>
   <div class="d-flex flex-wrap justify-content-center my-5">
-    <div class="text-center mx-5" v-for="board_director in directors[1]" :key="board_director.id">
-      <img class="profilePicture" :src="'data:image/jpeg;base64,' + board_director.picture[0].base_64"
-           :alt="board_director.profile[0].nom + ' ' + board_director.profile[0].prenom">
-      <div class="infosBlock">
-        <div class="nameText mt-1 mb-2">{{ board_director.profile[0].nom + ' ' + board_director.profile[0].prenom }}</div>
+    <template v-if="isLoading">
+      <div class="text-center">
+        <i class="spinner bi bi-arrow-clockwise"></i>
+        <div>Données en cours de récupération</div>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <div class="text-center mx-5" v-for="board_director in directors[1]" :key="board_director.id">
+        <img class="profilePicture" :src="'data:image/jpeg;base64,' + board_director.picture[0].base_64"
+             :alt="board_director.profile[0].nom + ' ' + board_director.profile[0].prenom">
+        <div class="infosBlock">
+          <div class="nameText mt-1 mb-2">{{ board_director.profile[0].nom + ' ' + board_director.profile[0].prenom }}</div>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -61,6 +77,7 @@ export default {
   name: "Dirigeants",
   data() {
     return {
+      isLoading: true,
       directors: null,
       jobsColors: [
         {name: 'secrétaire', color: '#BF0A1D'},
@@ -72,10 +89,11 @@ export default {
   },
   methods: {
     getDirectors: async function () {
-      this.directors = await axios.get('http://localhost:8081/api/employes/dirigeants')
-          .then(function (response) {
+      await axios.get('http://localhost:8081/api/employes/dirigeants')
+          .then(response => {
             console.log(response.data)
-            return response.data
+            this.directors = response.data
+            this.isLoading = false;
           })
     },
     getColor(poste) {

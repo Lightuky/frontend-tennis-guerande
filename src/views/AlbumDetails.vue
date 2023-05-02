@@ -3,29 +3,37 @@
     <div class="titrePrincipal text-center mb-4">{{ album.nom }}</div>
     <router-link class="backBtn btn btn-sm text-white" :to="{name: 'AlbumsListe'}">Revenir aux albums</router-link>
   </div>
-  <div class="albumInfos d-flex flex-wrap text-center justify-content-center">
-    <div class="mx-5">
-      <div class="catTitle mb-3">Catégorie</div>
-      <div class="catInfo text-capitalize"><span>{{ album.categorie }}</span></div>
+  <template v-if="isLoading">
+    <div class="text-center">
+      <i class="spinner bi bi-arrow-clockwise"></i>
+      <div>Données en cours de récupération</div>
     </div>
-    <div class="mx-5">
-      <div class="catTitle mb-3">Année</div>
-      <div class="catInfo">Ajouté en <span>{{ album.annee }}</span></div>
-    </div>
-    <div class="mx-5">
-      <div class="catTitle mb-3">Contenu</div>
-      <div class="catInfo"><span>{{ album.imagesCount }}</span> images</div>
-    </div>
-  </div>
-  <div class="mx-5">
-    <div class="containerTitle ms-3 my-5">Liste des photos de l'album</div>
-    <div class="photosContainer d-flex flex-wrap p-3 mb-5">
-      <div class="photoBlock text-center my-4 py-2" v-for="(photo, index) in album.images" :key="photo.id" @click="openModal(index)">
-        <img class="photoIcon" src="../assets/pictures.png" :alt="photo.nom" :title="photo.nom">
-        <div class="photoTitle w-75 mx-auto">{{ photo.nom }}</div>
+  </template>
+  <template v-else>
+    <div class="albumInfos d-flex flex-wrap text-center justify-content-center">
+      <div class="mx-5">
+        <div class="catTitle mb-3">Catégorie</div>
+        <div class="catInfo text-capitalize"><span>{{ album.categorie }}</span></div>
+      </div>
+      <div class="mx-5">
+        <div class="catTitle mb-3">Année</div>
+        <div class="catInfo">Ajouté en <span>{{ album.annee }}</span></div>
+      </div>
+      <div class="mx-5">
+        <div class="catTitle mb-3">Contenu</div>
+        <div class="catInfo"><span>{{ album.imagesCount }}</span> images</div>
       </div>
     </div>
-  </div>
+    <div class="mx-5">
+      <div class="containerTitle ms-3 my-5">Liste des photos de l'album</div>
+      <div class="photosContainer d-flex flex-wrap p-3 mb-5">
+        <div class="photoBlock text-center my-4 py-2" v-for="(photo, index) in album.images" :key="photo.id" @click="openModal(index)">
+          <img class="photoIcon" src="../assets/pictures.png" :alt="photo.nom" :title="photo.nom">
+          <div class="photoTitle w-75 mx-auto">{{ photo.nom }}</div>
+        </div>
+      </div>
+    </div>
+  </template>
   <div class="modal" ref="modal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -132,6 +140,7 @@ export default {
   name: "AlbumDetails",
   data() {
     return {
+      isLoading: true,
       album: [],
       albumName: '',
       currentIndex: null
@@ -144,10 +153,11 @@ export default {
   },
   methods: {
     getAlbum: async function () {
-      this.album = await axios.get('http://localhost:8081/api/albums/details/' + this.albumName)
-          .then(function (response) {
+      await axios.get('http://localhost:8081/api/albums/details/' + this.albumName)
+          .then(response => {
             console.log(response.data)
-            return response.data[0]
+            this.album = response.data[0]
+            this.isLoading = false;
           })
     },
     openModal(index) {

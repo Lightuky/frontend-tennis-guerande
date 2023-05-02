@@ -1,13 +1,21 @@
 <template>
   <div class="titrePrincipal">LE SECRÉTARIAT</div>
   <div class="d-flex flex-wrap justify-content-center mt-5 mb-1">
-    <div class="text-center mx-5" v-for="secretary in secretaries" :key="secretary.id">
-      <img class="profilePicture" :src="'data:image/jpeg;base64,' + secretary.picture[0].base_64" :alt="secretary.profile[0].nom + ' ' + secretary.profile[0].prenom">
-      <div class="infosBlock">
-        <div class="nameText mt-2 mb-1">{{ secretary.profile[0].nom + ' ' + secretary.profile[0].prenom }}</div>
-        <div class="jobText mt-1 mb-2">En poste depuis <span>{{ formatDate(secretary.dateEmbauche) }}</span></div>
+    <template v-if="isLoading">
+      <div class="text-center">
+        <i class="spinner bi bi-arrow-clockwise"></i>
+        <div>Données en cours de récupération</div>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <div class="text-center mx-5" v-for="secretary in secretaries" :key="secretary.id">
+        <img class="profilePicture" :src="'data:image/jpeg;base64,' + secretary.picture[0].base_64" :alt="secretary.profile[0].nom + ' ' + secretary.profile[0].prenom">
+        <div class="infosBlock">
+          <div class="nameText mt-2 mb-1">{{ secretary.profile[0].nom + ' ' + secretary.profile[0].prenom }}</div>
+          <div class="jobText mt-1 mb-2">En poste depuis <span>{{ formatDate(secretary.dateEmbauche) }}</span></div>
+        </div>
+      </div>
+    </template>
   </div>
   <div class="d-flex justify-content-around flex-wrap mb-5">
     <div class="coordsBlock w-50 text-center">
@@ -82,15 +90,17 @@ export default {
   name: "Secretariat",
   data() {
     return {
+      isLoading: true,
       secretaries: null,
     };
   },
   methods: {
     getSecretaries: async function () {
-      this.secretaries = await axios.get('http://localhost:8081/api/employes/poste/secrétaire' )
-          .then(function (response) {
+      await axios.get('http://localhost:8081/api/employes/poste/secrétaire')
+          .then(response => {
             console.log(response.data)
-            return response.data
+            this.secretaries = response.data
+            this.isLoading = false;
           })
     },
     formatDate(dateString) {

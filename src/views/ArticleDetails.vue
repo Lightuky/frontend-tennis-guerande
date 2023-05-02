@@ -1,23 +1,29 @@
 <template>
-  <div class="d-flex justify-content-center flex-wrap my-4">
-    <div class="infosBadge cat text-white px-3 py-1 me-3 text-capitalize">{{ article.categorie }}</div>
-    <div class="infosBadge season text-white px-3 py-1 ms-3 text-capitalize">{{ article.saisonnier ? 'Saisonnier' : 'Non-Saisonnier' }}</div>
-  </div>
-
-  <div class="jumbotron col-11 mx-auto mt-3 mb-4"
-       :style="'background:url(' + (article.image.length !== 0 ? 'data:image/jpeg;base64,' + article.image[0].base_64 : '../../src/assets/article-placeholder.jpg') + ')'">
-    <div class="container d-flex p-0 mx-auto h-100">
-      <div class="jumboTextBox text-center mx-auto my-auto px-5 py-3">
-        <div class="articleTitle">{{ article.titre }}</div>
-        <div class="articleInfos age my-2">Ajouté le <span>{{ formatDate(article.createdAt) }}</span></div>
-        <div class="articleInfos author">Par <span>{{ article.personne.length !== 0 ? article.personne[0].nom + ' ' + article.personne[0].prenom : 'Inconnu' }}</span></div>
+  <template v-if="isLoading">
+    <div class="text-center">
+      <i class="spinner bi bi-arrow-clockwise"></i>
+      <div>Données en cours de récupération</div>
+    </div>
+  </template>
+  <template v-else>
+    <div class="d-flex justify-content-center flex-wrap my-4">
+      <div class="infosBadge cat text-white px-3 py-1 me-3 text-capitalize">{{ article.categorie }}</div>
+      <div class="infosBadge season text-white px-3 py-1 ms-3 text-capitalize">{{ article.saisonnier ? 'Saisonnier' : 'Non-Saisonnier' }}</div>
+    </div>
+    <div class="jumbotron col-11 mx-auto mt-3 mb-4"
+         :style="'background:url(' + (article.image.length !== 0 ? 'data:image/jpeg;base64,' + article.image[0].base_64 : '../../src/assets/article-placeholder.jpg') + ')'">
+      <div class="container d-flex p-0 mx-auto h-100">
+        <div class="jumboTextBox text-center mx-auto my-auto px-5 py-3">
+          <div class="articleTitle">{{ article.titre }}</div>
+          <div class="articleInfos age my-2">Ajouté le <span>{{ formatDate(article.createdAt) }}</span></div>
+          <div class="articleInfos author">Par <span>{{ article.personne.length !== 0 ? article.personne[0].nom + ' ' + article.personne[0].prenom : 'Inconnu' }}</span></div>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="containerTitle text-center mb-4 mt-2">Contenu de l'article</div>
-  <div class="articleContent col-11 mx-auto p-5 mb-2">{{ article.contenu }}</div>
-  <router-link class="backBtn btn btn-sm mb-5 d-flex mx-auto text-white" :to="{name: 'ArticlesListe'}">Revenir aux articles</router-link>
+    <div class="containerTitle text-center mb-4 mt-2">Contenu de l'article</div>
+    <div class="articleContent col-11 mx-auto p-5">{{ article.contenu }}</div>
+  </template>
+  <router-link class="backBtn btn btn-sm mb-5 mt-2 d-flex mx-auto text-white" :to="{name: 'ArticlesListe'}">Revenir aux articles</router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -100,6 +106,7 @@ export default {
   name: "ArticleDetails",
   data() {
     return {
+      isLoading: true,
       article: [],
       articleTitle: '',
     }
@@ -111,10 +118,11 @@ export default {
   },
   methods: {
     getArticle: async function () {
-      this.article = await axios.get('http://localhost:8081/api/articles/details/' + this.articleTitle)
-          .then(function (response) {
+      await axios.get('http://localhost:8081/api/articles/details/' + this.articleTitle)
+          .then(response => {
             console.log(response.data)
-            return response.data[0]
+            this.article = response.data[0]
+            this.isLoading = false;
           })
     },
     formatDate(dateString) {

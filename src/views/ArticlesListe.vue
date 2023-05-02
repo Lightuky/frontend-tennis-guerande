@@ -36,23 +36,31 @@
   <div class="mx-5 mt-3">
     <div class="containerTitle ms-0 mb-4">Liste des articles</div>
     <div class="articleContainer py-2 mb-4">
-      <router-link class="articleBlock nav-link my-4" v-for="article in articles" :key="article.id"
-                   :to="{ name: 'ArticleDetails', params: {articleTitle: article.titre}}">
-        <div class="row justify-content-center">
-          <div class="imgContainer col-2 px-0"
-               :style="'background:url(' + (article.image.length !== 0 ? 'data:image/jpeg;base64,' + article.image[0].base_64 : '../src/assets/article-placeholder.jpg') + ')'">
-          </div>
-          <div class="articleInfosBlock col-9 px-0">
-            <div class="d-flex justify-content-between align-items-center py-3 ps-4 pe-3">
-              <div class="articleTitle">{{ article.titre }}</div>
-              <div class="catBadge px-4 text-white text-capitalize" :style="{'background-color': getColor(article.categorie)}">
-                {{ article.categorie }}
-              </div>
-            </div>
-            <div class="articleDesc px-4 mb-4">{{ article.contenu }}</div>
-          </div>
+      <template v-if="isLoading">
+        <div class="text-center">
+          <i class="spinner bi bi-arrow-clockwise"></i>
+          <div>Données en cours de récupération</div>
         </div>
-      </router-link>
+      </template>
+      <template v-else>
+        <router-link class="articleBlock nav-link my-4" v-for="article in articles" :key="article.id"
+                     :to="{ name: 'ArticleDetails', params: {articleTitle: article.titre}}">
+          <div class="row justify-content-center">
+            <div class="imgContainer col-2 px-0"
+                 :style="'background:url(' + (article.image.length !== 0 ? 'data:image/jpeg;base64,' + article.image[0].base_64 : '../src/assets/article-placeholder.jpg') + ')'">
+            </div>
+            <div class="articleInfosBlock col-9 px-0">
+              <div class="d-flex justify-content-between align-items-center py-3 ps-4 pe-3">
+                <div class="articleTitle">{{ article.titre }}</div>
+                <div class="catBadge px-4 text-white text-capitalize" :style="{'background-color': getColor(article.categorie)}">
+                  {{ article.categorie }}
+                </div>
+              </div>
+              <div class="articleDesc px-4 mb-4">{{ article.contenu }}</div>
+            </div>
+          </div>
+        </router-link>
+      </template>
     </div>
   </div>
 
@@ -137,7 +145,6 @@
     conic-gradient(from 0deg at bottom 3px left 3px, #0000 90deg, #FFBCBCFF 0) 0 100% / 35px 35px border-box no-repeat,
     conic-gradient(from -90deg at bottom 3px right 3px, #0000 90deg, #FFBCBCFF 0) 100% 100% / 35px 35px border-box no-repeat;
   }
-
 </style>
 
 <script>
@@ -153,6 +160,7 @@ export default {
         {name: 'résultats', color: '#d10f16'},
         {name: 'événements', color: '#F0621D'},
       ],
+      isLoading: true,
       categories: [],
       articles: null,
       searchText: '',
@@ -186,13 +194,15 @@ export default {
       this.selectedAge ? apiUrl += `&age=${this.selectedAge}` : null;
       this.selectedSeasonal ? apiUrl += `&seasonal=${this.selectedSeasonal}` : null;
       this.searchText ? apiUrl += `&title=${this.searchText}` : null;
-      this.articles = await axios.get(apiUrl)
-          .then(function (response) {
+      await axios.get(apiUrl)
+          .then(response => {
             console.log(response.data)
-            return response.data
+            this.articles = response.data
+            this.isLoading = false;
           })
     },
     updateArticles() {
+      this.isLoading = true;
       this.getArticles();
     },
     clearSearch() {
