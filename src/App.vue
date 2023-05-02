@@ -1,6 +1,6 @@
 <template>
   <HeaderComposant/>
-  <router-view></router-view>
+  <router-view :key="$route.name"></router-view>
   <FooterComposant/>
 </template>
 
