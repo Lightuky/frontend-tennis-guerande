@@ -16,7 +16,15 @@
   </ul>
   <div class="titrePrincipal">DERNIÈRES ACTUALITÉS</div>
   <div class="conteneurArticles">
-    <ArticleAccueil v-for="article in articles" :key="article.id" :article="article" @update-desc="updateTitreLien"></ArticleAccueil>
+    <template v-if="isLoading">
+      <div class="text-center">
+        <i class="spinner bi bi-arrow-clockwise"></i>
+        <div>Données en cours de récupération</div>
+      </div>
+    </template>
+    <template v-else>
+      <ArticleAccueil v-for="article in articles" :key="article.id" :article="article" @update-desc="updateTitreLien"></ArticleAccueil>
+    </template>
   </div>
   <div class="titreLien" :class="{ descOpen: articleDescOpen }">
     <router-link class="nav-link" :to="{ name: 'ArticlesListe'}">Voir toutes les actualités</router-link>
@@ -32,16 +40,18 @@ export default {
   components: {ArticleAccueil},
   data() {
     return {
+      isLoading: true,
       articles: null,
       articleDescOpen: 0
     };
   },
   methods: {
     getArticles: async function () {
-      this.articles = await axios.get('http://localhost:8081/api/articles?limit=3' )
-          .then(function (response) {
+      await axios.get('http://localhost:8081/api/articles?limit=3')
+          .then(response => {
             console.log(response.data)
-            return response.data
+            this.articles = response.data
+            this.isLoading = false;
           })
     },
     updateTitreLien(desc) {
